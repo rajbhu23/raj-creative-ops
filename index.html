@@ -216,7 +216,10 @@
         <select class="f" id="archClient"><option value="">Client</option><option>Glushon SM</option><option>Momentous</option><option>GSL</option><option>Personal</option><option>Other</option></select>
         <select class="f" id="archType"><option value="">Type</option><option>Graphic</option><option>Video</option><option>Photo</option><option>Social</option><option>Brand</option><option>Admin</option></select>
       </div>
-      <input class="f" type="date" id="archDate" style="margin-bottom:8px" />
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;flex-shrink:0;">DATE</span>
+        <input class="f" type="date" id="archDate" style="flex:1;" />
+      </div>
       <button class="btn" onclick="addArchive()">+ ADD TO ARCHIVE</button>
     </div>
 
