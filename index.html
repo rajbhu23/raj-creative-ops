@@ -143,7 +143,7 @@
       <input class="f" type="text" id="tName" placeholder="Task name..." style="margin-bottom:8px" />
       <div class="add-row">
         <select class="f" id="tClient"><option value="">Client</option><option>Glushon SM</option><option>Momentous</option><option>GSL</option><option>RFF</option><option>Personal</option><option>Other</option></select>
-        <select class="f" id="tType"><option value="">Type</option><option>Graphic</option><option>Video</option><option>Photo</option><option>Social</option><option>Brand</option><option>Admin</option></select>
+        <select class="f" id="tType"><option value="">Type</option><option>Graphic</option><option>Video</option><option>Photo</option><option>PDF</option><option>Social</option><option>Brand</option><option>Admin</option></select>
       </div>
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
         <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;flex-shrink:0;">DUE</span>
@@ -172,7 +172,7 @@
       <div class="tlbl" id="timerLbl">No task running</div>
       <div class="tsel">
         <select class="f" id="timerTask"><option value="">Task...</option></select>
-        <select class="f" id="timerType"><option value="">Type</option><option>Graphic</option><option>Video</option><option>Photo</option><option>Social</option><option>Brand</option><option>Admin</option></select>
+        <select class="f" id="timerType"><option value="">Type</option><option>Graphic</option><option>Video</option><option>Photo</option><option>PDF</option><option>Social</option><option>Brand</option><option>Admin</option></select>
       </div>
       <button class="tbtn" id="timerBtn" onclick="toggleTimer()">START</button>
     </div>
@@ -184,7 +184,7 @@
       <div class="ct">Log Manual Entry</div>
       <input class="f" type="text" id="mTask" placeholder="Task name" style="margin-bottom:8px" />
       <div class="add-row" style="margin-bottom:8px">
-        <select class="f" id="mType"><option value="">Type</option><option>Graphic</option><option>Video</option><option>Photo</option><option>Social</option><option>Brand</option><option>Admin</option></select>
+        <select class="f" id="mType"><option value="">Type</option><option>Graphic</option><option>Video</option><option>Photo</option><option>PDF</option><option>Social</option><option>Brand</option><option>Admin</option></select>
         <select class="f" id="mClient"><option value="">Client</option><option>Glushon SM</option><option>Momentous</option><option>GSL</option><option>RFF</option><option>Personal</option><option>Other</option></select>
       </div>
       <div class="add-row" style="margin-bottom:8px;align-items:center">
@@ -198,6 +198,11 @@
 
     <div class="card">
       <div class="ct" style="display:flex;justify-content:space-between"><span>Time Log</span><span id="todayTotal" style="color:var(--accent);font-size:10px;font-family:'DM Mono',monospace"></span></div>
+      <div class="add-row" style="margin-bottom:8px;">
+        <select class="f" id="logFilterClient" onchange="rLog()"><option value="">All Clients</option><option>Glushon SM</option><option>Momentous</option><option>GSL</option><option>RFF</option><option>Personal</option><option>Other</option></select>
+        <select class="f" id="logFilterSpan" onchange="rLog()"><option value="all">All Time</option><option value="today">Today</option><option value="thisweek">This Week</option><option value="week">Last 7 Days</option><option value="month">This Month</option></select>
+      </div>
+      <div id="logFilterTotal" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);margin-bottom:8px;min-height:16px;"></div>
       <div id="logList"><div class="empty">No sessions yet</div></div>
     </div>
   </div>
@@ -215,7 +220,7 @@
       <input class="f" type="text" id="archName" placeholder="Task name" style="margin-bottom:8px" />
       <div class="add-row" style="margin-bottom:8px">
         <select class="f" id="archClient"><option value="">Client</option><option>Glushon SM</option><option>Momentous</option><option>GSL</option><option>RFF</option><option>Personal</option><option>Other</option></select>
-        <select class="f" id="archType"><option value="">Type</option><option>Graphic</option><option>Video</option><option>Photo</option><option>Social</option><option>Brand</option><option>Admin</option></select>
+        <select class="f" id="archType"><option value="">Type</option><option>Graphic</option><option>Video</option><option>Photo</option><option>PDF</option><option>Social</option><option>Brand</option><option>Admin</option></select>
       </div>
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
         <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;flex-shrink:0;">DATE</span>
@@ -270,9 +275,9 @@
   <!-- HOURS PAGE -->
   <div class="page" id="page-hours">
     <div class="chips" style="margin-bottom:14px;">
-      <div class="chip active" onclick="setPeriod('all',this)">All Time</div>
+      <div class="chip" onclick="setPeriod('all',this)">All Time</div>
       <div class="chip" onclick="setPeriod('month',this)">This Month</div>
-      <div class="chip" onclick="setPeriod('week',this)">This Week</div>
+      <div class="chip active" onclick="setPeriod('week',this)">This Week</div>
     </div>
 
     <div class="card">
@@ -296,7 +301,7 @@
     <div class="mt">EDIT TASK</div>
     <div class="mr"><div class="ml">Task Name</div><input class="f" type="text" id="editName" /></div>
     <div class="mr"><div class="ml">Client</div><select class="f" id="editClient"><option value="">No client</option><option>Glushon SM</option><option>Momentous</option><option>GSL</option><option>RFF</option><option>Personal</option><option>Other</option></select></div>
-    <div class="mr"><div class="ml">Type</div><select class="f" id="editType"><option value="">No type</option><option>Graphic</option><option>Video</option><option>Photo</option><option>Social</option><option>Brand</option><option>Admin</option></select></div>
+    <div class="mr"><div class="ml">Type</div><select class="f" id="editType"><option value="">No type</option><option>Graphic</option><option>Video</option><option>Photo</option><option>PDF</option><option>Social</option><option>Brand</option><option>Admin</option></select></div>
     <div class="mr"><div class="ml">Due Date</div><input class="f" type="date" id="editDue" /></div>
     <div class="mbtns"><button class="mcan" onclick="closeModal()">CANCEL</button><button class="btn" onclick="saveEdit()">SAVE</button></div>
   </div>
@@ -359,8 +364,28 @@ window.toggleTimer=function(){
 };
 window.logManual=async function(){const n=document.getElementById('mTask').value.trim();const h=parseInt(document.getElementById('mHrs').value)||0;const m=parseInt(document.getElementById('mMins').value)||0;const dur=h*3600+m*60;if(!n||!dur)return;sync('saving','Saving...');await addDoc(collection(db,'logs'),{taskName:n,type:document.getElementById('mType').value,client:document.getElementById('mClient').value,dur,date:new Date().toISOString()});document.getElementById('mTask').value='';document.getElementById('mHrs').value='';document.getElementById('mMins').value='';};
 window.delLog=async function(id){sync('saving','Saving...');await deleteDoc(doc(db,'logs',id));};
-function rAvg(){const types=['Graphic','Video','Photo','Social','Brand','Admin'];document.getElementById('avgGrid').innerHTML=types.map(type=>{const e=logs.filter(l=>l.type===type);const avg=e.length?Math.round(e.reduce((s,l)=>s+(l.dur||0),0)/e.length):0;return`<div class="avg-card"><div class="avg-type">${type}</div><div class="avg-val">${avg?fd(avg):'--'}</div><div class="avg-cnt">${e.length}x</div></div>`;}).join('');}
-function rLog(){const ts=now.toDateString();const tot=logs.filter(l=>new Date(l.date).toDateString()===ts).reduce((s,l)=>s+(l.dur||0),0);document.getElementById('todayTotal').textContent=tot?`TODAY: ${fd(tot)}`:'';const el=document.getElementById('logList');const sorted=[...logs].sort((a,b)=>new Date(b.date)-new Date(a.date));if(!sorted.length){el.innerHTML='<div class="empty">No sessions yet</div>';return;}el.innerHTML=sorted.slice(0,30).map(l=>{const d=new Date(l.date);const ds=d.toDateString()===ts?'Today':d.toLocaleDateString('en-US',{month:'short',day:'numeric'});const c=cc(l.client);return`<div class="lli"><div class="tinfo"><div class="lln">${l.taskName}</div><div class="llm">${l.type||'—'} · <span style="color:${c.color}">${l.client||'—'}</span> · ${ds}</div></div><div class="lld" style="color:${c.color}">${fd(l.dur||0)}</div><button class="bgh" onclick="delLog('${l.id}')">✕</button></div>`;}).join('');}
+function rAvg(){const types=['Graphic','Video','Photo','PDF','Social','Brand','Admin'];document.getElementById('avgGrid').innerHTML=types.map(type=>{const e=logs.filter(l=>l.type===type);const avg=e.length?Math.round(e.reduce((s,l)=>s+(l.dur||0),0)/e.length):0;return`<div class="avg-card"><div class="avg-type">${type}</div><div class="avg-val">${avg?fd(avg):'--'}</div><div class="avg-cnt">${e.length}x</div></div>`;}).join('');}
+window.rLog=function rLog(){
+  const ts=now.toDateString();
+  const tot=logs.filter(l=>new Date(l.date).toDateString()===ts).reduce((s,l)=>s+(l.dur||0),0);
+  document.getElementById('todayTotal').textContent=tot?`TODAY: ${fd(tot)}`:'';
+  const cf=document.getElementById('logFilterClient').value;
+  const sf=document.getElementById('logFilterSpan').value;
+  const now2=new Date();
+  let filtered=[...logs];
+  if(cf)filtered=filtered.filter(l=>l.client===cf);
+  if(sf==='today')filtered=filtered.filter(l=>new Date(l.date).toDateString()===ts);
+  else if(sf==='thisweek'){const ws=getMonWeekStart();filtered=filtered.filter(l=>new Date(l.date)>=ws);}
+  else if(sf==='week'){const wa=new Date(now2-7*864e5);filtered=filtered.filter(l=>new Date(l.date)>=wa);}
+  else if(sf==='month'){const ms=new Date(now2.getFullYear(),now2.getMonth(),1);filtered=filtered.filter(l=>new Date(l.date)>=ms);}
+  const filtTotal=filtered.reduce((s,l)=>s+(l.dur||0),0);
+  const ftEl=document.getElementById('logFilterTotal');
+  if(cf||sf!=='all'){const label=(cf||'All')+' · '+(sf==='all'?'All Time':sf==='today'?'Today':sf==='thisweek'?'This Week':sf==='week'?'Last 7 Days':'This Month');ftEl.textContent=filtTotal?`${label}: ${fd(filtTotal)}`:`${label}: no time logged`;}else{ftEl.textContent='';}
+  const el=document.getElementById('logList');
+  const sorted=[...filtered].sort((a,b)=>new Date(b.date)-new Date(a.date));
+  if(!sorted.length){el.innerHTML='<div class="empty">No sessions match</div>';return;}
+  el.innerHTML=sorted.slice(0,30).map(l=>{const d=new Date(l.date);const ds=d.toDateString()===ts?'Today':d.toLocaleDateString('en-US',{month:'short',day:'numeric'});const c=cc(l.client);return`<div class="lli"><div class="tinfo"><div class="lln">${l.taskName}</div><div class="llm">${l.type||'—'} · <span style="color:${c.color}">${l.client||'—'}</span> · ${ds}</div></div><div class="lld" style="color:${c.color}">${fd(l.dur||0)}</div><button class="bgh" onclick="delLog('${l.id}')">✕</button></div>`;}).join('');
+}
 window.addArchive=async function(){const n=document.getElementById('archName').value.trim();if(!n)return;const dv=document.getElementById('archDate').value;sync('saving','Saving...');await addDoc(collection(db,'archive'),{fromTaskId:null,name:n,client:document.getElementById('archClient').value,type:document.getElementById('archType').value,date:dv?new Date(dv+'T12:00:00').toISOString():new Date().toISOString(),note:''});document.getElementById('archName').value='';document.getElementById('archDate').value='';};
 window.delArchive=async function(id){sync('saving','Saving...');await deleteDoc(doc(db,'archive',id));};
 window.setArchFilter=function(f,b){archFilter=f;document.querySelectorAll('#page-archive .chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderArchive();};
@@ -383,13 +408,14 @@ window.renderArchive=function(){
   }).join('')}</div>`).join('');
 };
 
-let hoursPeriod='all';
+let hoursPeriod='week';
 window.setPeriod=function(p,b){hoursPeriod=p;document.querySelectorAll('#page-hours .chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderHours();};
-function getFilteredLogs(){const n2=new Date();if(hoursPeriod==='week'){const wa=new Date(n2-7*864e5);return logs.filter(l=>new Date(l.date)>=wa);}if(hoursPeriod==='month'){const ms=new Date(n2.getFullYear(),n2.getMonth(),1);return logs.filter(l=>new Date(l.date)>=ms);}return logs;}
+function getMonWeekStart(){const n=new Date();const day=n.getDay();const diff=day===0?6:day-1;const mon=new Date(n);mon.setDate(n.getDate()-diff);mon.setHours(0,0,0,0);return mon;}
+function getFilteredLogs(){const n2=new Date();if(hoursPeriod==='week'){const ws=getMonWeekStart();return logs.filter(l=>new Date(l.date)>=ws);}if(hoursPeriod==='month'){const ms=new Date(n2.getFullYear(),n2.getMonth(),1);return logs.filter(l=>new Date(l.date)>=ms);}return logs;}
 function renderHours(){
   const fl=getFilteredLogs();
   const clients=['Glushon SM','Momentous','GSL','RFF','Personal','Other'];
-  const types=['Graphic','Video','Photo','Social','Brand','Admin'];
+  const types=['Graphic','Video','Photo','PDF','Social','Brand','Admin'];
   const totalSecs=fl.reduce((s,l)=>s+(l.dur||0),0);
   document.getElementById('totalHoursDisplay').textContent=totalSecs?fd(totalSecs):'--';
   document.getElementById('totalSessionsDisplay').textContent=`${fl.length} session${fl.length!==1?'s':''}`;
